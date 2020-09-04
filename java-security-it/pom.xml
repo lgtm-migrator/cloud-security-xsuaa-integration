@@ -71,6 +71,12 @@
             <artifactId>spring-xsuaa</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.sap.cloud.security.xsuaa</groupId>
+            <artifactId>java-container-security</artifactId>
+            <version>3.14.7</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
