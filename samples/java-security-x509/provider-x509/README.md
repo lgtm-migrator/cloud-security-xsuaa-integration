@@ -1,6 +1,6 @@
 # Description
 This sample is a Java back-end application running on the Cloud Foundry as a service provider. For all incoming requests it checks whether the user is authorized using the 
-[`IasTokenAuthenticator`](/java-security/src/main/java/com/sap/cloud/security/servlet) which is defined in the [Java Security](../../java-security/) library and it validates X509 certificate from the incoming request.
+[`IasTokenAuthenticator`](https://github.com/SAP/cloud-security-xsuaa-integration/blob/x509-app2service/java-security/src/main/java/com/sap/cloud/security/servlet/IasTokenAuthenticator.java) which is defined in the [Java Security](https://github.com/SAP/cloud-security-xsuaa-integration/tree/x509-app2service/java-security) library and it validates X509 certificate from the incoming request.
 
 # Deployment on Cloud Foundry
 To deploy the application, the following steps are required:
@@ -107,7 +107,7 @@ cf create-service provider-service-x509 reuse-plan provider-service-x509-instanc
 
 More information about registering service in Service manager can be found [here](https://wiki.wdf.sap.corp/wiki/display/PFS/How+to+register+a+subaccount-scoped+service+broker)
 
-Proceed with consumer application setup follow steps in the [read me](../consumer-x509/README.md)
+Proceed with consumer application setup by following steps in the [consumer-x509 readme](../consumer-x509/README.md)
 
 ## Clean-Up
 Finally, delete your application and your service instances using the following commands:
