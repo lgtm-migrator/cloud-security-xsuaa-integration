@@ -1,0 +1,42 @@
+{
+    "provider-service-instance": [
+      {
+        "label": "provider-service-instance",
+        "provider": null,
+        "plan": "reuse-plan",
+        "name": "provider-service-instance",
+        "tags": [],
+        "instance_guid": "80000x00-d0d0-d0d0-d0d0-83f9bf0f7099",
+        "instance_name": "reuse-service-instance",
+        "binding_guid": "80000x00-d0d0-d0d0-d0d0-b2b3c137e3d3",
+        "binding_name": null,
+        "credentials": {
+          "url": "https://my-reuse-service.url.com"
+        },
+        "syslog_drain_url": null,
+        "volume_mounts": []
+      }
+    ],
+    "identity": [
+      {
+        "label": "identity",
+        "provider": null,
+        "plan": "application",
+        "name": "consumer-ias",
+        "tags": [],
+        "instance_name": "consumer-ias",
+        "binding_name": null,
+        "credentials": {
+          "clientid": "my-clientid",
+          "certificate_expires_at": "2021-04-08T14:58:40Z",
+          "domain": "auth.com",
+          "certificate": "-----BEGIN CERTIFICATE-----\ncertificate\n-----END CERTIFICATE-----",
+          "zone_uuid": "my-zoneid",
+          "key": "-----BEGIN RSA PRIVATE KEY-----\ncertificateKey\n-----END RSA PRIVATE KEY-----",
+          "url": "https://my-ias.auth.com"
+        },
+        "syslog_drain_url": null,
+        "volume_mounts": []
+      }
+    ]
+}
