@@ -1,6 +1,6 @@
 # Description
 This sample is a Java back-end consumer application running on the Cloud Foundry that consumes by [Service Manager](https://help.sap.com/viewer/09cc82baadc542a688176dce601398de/Cloud/en-US/3a27b85a47fc4dff99184dd5bf181e14.html) exposed reusable service via mTLS. For all incoming requests it checks whether the user is authorized using the 
-[`IasTokenAuthenticator`](/java-security/src/main/java/com/sap/cloud/security/servlet) which is defined in the [Java Security](../../java-security/) library. Then request is forwarded to provider-service via mTLS.
+[`IasTokenAuthenticator`](https://github.com/SAP/cloud-security-xsuaa-integration/blob/x509-app2service/java-security/src/main/java/com/sap/cloud/security/servlet/IasTokenAuthenticator.java) which is defined in the [Java Security](https://github.com/SAP/cloud-security-xsuaa-integration/tree/x509-app2service/java-security) library. Then request is forwarded to provider-service via mTLS.
 
 # Deployment on Cloud Foundry
 To deploy the application, the following steps are required:
@@ -35,7 +35,7 @@ Deploy the application using cf push. It will expect 1 GB of free memory quota.
 cf push --vars-file ../vars.yml
 ```
 
-##Bind consumer-x509 application
+## Bind consumer-x509 application
 - Bind application with `consumer-ias` instance
 ```shell script
 cf bind-service consumer-x509 consumer-ias -c '{"credential-type": "X509_GENERATED"}'
@@ -60,7 +60,7 @@ curl -X POST \
 curl -X GET https://consumer-x509-((ID)).((LANDSCAPE_APPS_DOMAIN))/hello-x509 -H 'Authorization: Bearer <<your id_token>>'
 ```
 
-If provider-service could be accessed by consumer you should see something like this:
+If `provider-service-x509` could be accessed by consumer application `consumer-x509` you should see something like this:
 :smile:
 
 ## Clean-Up
