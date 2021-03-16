@@ -1,0 +1,17 @@
+---
+# Configuration:
+# configured for EU10. For other landscapes, please adopt the destination in ../vars.yml
+# If the routes are occupied, you might need to change the host
+applications:
+- name: provider-service-x509
+  instances: 1
+  memory: 896M
+  routes:
+    - route: provider-service-x509-((ID)).((LANDSCAPE_APPS_DOMAIN))
+    - route: provider-service-x509-((ID)).cert.((LANDSCAPE_APPS_DOMAIN))
+  path: target/java-security-x509-provider.war
+  buildpacks:
+    - java_buildpack
+  service:
+    - service-provider-broker
+...

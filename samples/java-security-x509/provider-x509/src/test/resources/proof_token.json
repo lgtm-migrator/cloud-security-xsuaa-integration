@@ -1,0 +1,28 @@
+[
+  {
+    "consumerClientId": "ab123456-s1me-1a2b-1abc-1abcdfe234c5e",
+    "consumedServiceInstanceIds": [
+      "0ab01234-a123-12ab-1234-1234a0b12340"
+    ],
+    "providerClientId": "123a45e6-1234-12ab-1234-1234a123ab12",
+    "x509": [
+      {
+        "dn": "CN=bdcd300c-b202-4a7a-bb95-2a7e6d15fe47/5ae493c5-e0ed-4d34-a1c6-97a7c715dc54,L=aoxk2addh.accounts400.ondemand.com,OU=8e1affb2-62a1-43cc-a687-2ba75e4b3d84,OU=Canary,OU=SAP Cloud Platform Clients,O=SAP SE,C=DE",
+        "issuer": "CN=SAP Cloud Platform Client CA,OU=SAP Cloud Platform Clients,O=SAP SE,L=EU10-Canary,C=DE"
+      }
+    ]
+  },
+  {
+    "consumerClientId": "ab123456-123a-1a23-1abc-1abcde2d3f4g",
+    "consumedServiceInstanceIds": [
+      "1ab12345-1123-12ab-1234-1234a1a12345"
+    ],
+    "providerClientId": "123a45e6-1234-12fd-1234-1234e123ba12",
+    "x509": [
+      {
+        "dn": "CN=0f0ffff0-00f0-00ff-f000-0ff00f0f0f00/0f0ffff0-00f0-00ff-f000-0ff00f0f0f00,L=auth.accounts.com,OU=0f0ffff0-00f0-00ff-f000-0ff00f0f0f00,OU=Test,OU=SAP BTP Clients,O=SAP SE,C=DE",
+        "issuer": "CN=Second CA,OU=SAP BTP Clients,O=SAP SE,L=EU,C=DE"
+      }
+    ]
+  }
+]

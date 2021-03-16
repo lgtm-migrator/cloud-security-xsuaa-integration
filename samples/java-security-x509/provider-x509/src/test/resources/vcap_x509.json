@@ -1,0 +1,42 @@
+{
+    "provider-service-instance": [
+      {
+        "label": "reuse-service",
+        "provider": null,
+        "plan": "reuse-plan",
+        "name": "provider-service-instance",
+        "tags": [],
+        "instance_guid": "80000x00-d0d0-d0d0-d0d0-83f9bf0f7099",
+        "instance_name": "reuse-service-instance",
+        "binding_guid": "80000x00-d0d0-d0d0-d0d0-b2b3c137e3d3",
+        "binding_name": null,
+        "credentials": {
+          "url": "https://my-reuse-service.url.com"
+        },
+        "syslog_drain_url": null,
+        "volume_mounts": []
+      }
+    ],
+    "identity": [
+      {
+        "label": "identity",
+        "provider": null,
+        "plan": "application",
+        "name": "consumer-ias",
+        "tags": [],
+        "instance_name": "consumer-ias",
+        "binding_name": null,
+        "credentials": {
+          "clientid": "my-clientid",
+          "certificate_expires_at": "2021-04-08T14:58:40Z",
+          "domain": "auth.com",
+          "certificate": "-----BEGIN CERTIFICATE-----\nMIIGHzCCBAegAwIBAgIQKDnU0wh9bTlh7lW7oME2BjANBgkqhkiG9w0BAQsFADCB\ngDELMAkGA1UEBhMCREUxFDASBgNVBAcMC0VVMTAtQ2FuYXJ5MQ8wDQYDVQQKDAZT\nQVAgU0UxIzAhBgNVBAsMGlNBUCBDbG91ZCBQbGF0Zm9ybSBDbGllbnRzMSUwIwYD\nVQQDDBxTQVAgQ2xvdWQgUGxhdGZvcm0gQ2xpZW50IENBMB4XDTIxMDMwOTEzNTg0\nMFoXDTIxMDQwODE0NTg0MFowggEEMQswCQYDVQQGEwJERTEPMA0GA1UEChMGU0FQ\nIFNFMSMwIQYDVQQLExpTQVAgQ2xvdWQgUGxhdGZvcm0gQ2xpZW50czEPMA0GA1UE\nCxMGQ2FuYXJ5MS0wKwYDVQQLEyQ4ZTFhZmZiMi02MmExLTQzY2MtYTY4Ny0yYmE3\nNWU0YjNkODQxKzApBgNVBAcTImFveGsyYWRkaC5hY2NvdW50czQwMC5vbmRlbWFu\nZC5jb20xUjBQBgNVBAMTSTkzMWZiNzhjLTZiMzItNDJkZS1iYTJhLTI4YjQ0ZWY0\nOTUwYy83NTIxMGUyNC1iZTdkLTQxNDctOTYyZC0zNWI0OWYwMDlkNDEwggEiMA0G\nCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCPnJDeEGx6RmyZ+3NHIIRuZiw73QdQ\n1i2JppXQOSZGqo94Pyy438en1ctFzJBEqBnaH5jWcjPXmfWHXKTMSoAZwhac28jP\nW0Nql/oAsBtcYo89X3+irO3j2dmr7khfrvJBmDh/c+PkpImELdySQDZ/VwJq+FUj\n2vgFNswUl7pwjGO76xO/lhcSkrrpYj7N7mY4ojt56cdzNJ5Bb8bOSpmQOXWv+2yl\ns7KXWa0xBUFpA4/VBLG1BPnGr7TfpGsuCdi0Soqgcjik7bpLlI6Tm3iB3eywqGWp\nQfbNFM0yRdUf/nt3ABygYUESBgvLnvTJrjWdW4eUDLAX/T1Kkcoq4ONxAgMBAAGj\nggEMMIIBCDAJBgNVHRMEAjAAMB8GA1UdIwQYMBaAFMwghFuHFYs3+X6Hsck+w2+V\nBG6RMB0GA1UdDgQWBBSrDueZBRohCzXCELjMFnmgk1A5pDAOBgNVHQ8BAf8EBAMC\nBaAwEwYDVR0lBAwwCgYIKwYBBQUHAwIwgZUGA1UdHwSBjTCBijCBh6CBhKCBgYZ/\naHR0cDovL3NhcC1jbG91ZC1wbGF0Zm9ybS1jbGllbnQtY2EtZXUxMC1jYW5hcnkt\nY3Jscy5zMy5ldS1jZW50cmFsLTEuYW1hem9uYXdzLmNvbS9jcmwvZjhhYmU1NGUt\nMTk1MS00NzBlLWFlMmQtZGU0MGMxNjMzNDFjLmNybDANBgkqhkiG9w0BAQsFAAOC\nAgEAgqDHQiveCEwKlFUz54OhLK893kFTZ8r0U0Zha2S2rpCN5VtQYDcWONZuA9i1\nkLjW2RourrzBYHg6Io2XbPogb11aJVtC8RoOYiChCPPcmivf7kwXexAx3/bAdQtS\nI1qZf1gHKLOUGBU2yylvkgkGkaU6xkc5trAqwRJaEv7sLx7fCTcFY3x1aVLoptqW\nNKJDb734McmCTvVix0jfb0paVW2Eyy82PnNOZSgATZb/sRIL/tZnA54HfSX15L9v\n1bCslg5d5sbyWjhYh0XyLhCqODI/8PsYsxOZahClSPZiXnklNFihxZr0ApchD8wS\nO0kZU+kJp25tuyEQYGc34td+JSfC5t/pvqiDXTpQW/rulg6cfsqPrXaNos4gOqcx\nGMs3wWlOSgpQKOiTCVbje7RrS1z2FiR53x3JwOgrVJTJWEIYH3uiexqGC9yOq0HH\nqMFP/PGN3AKiqvdNVIn7pKCztynS0t8InqOHVVl5Af8qt4if/Jd3TCX5rtp1C0rY\n+u3ddlNmW2g+JSm/eID7w839FkB2mYe5ceNv4SVMS3NrJYqs1/7XSDJjpIYKqxty\n2TMMRxq6tnoYe6EZxLiz0m0tx8Nskx8wB5VItIr7dUtr8xA+qhQPstrXDYUveKib\nKFm8El2Lk2apzc7szOwHGFo9RZSZDEoys8xXbdnjaQi+95E=\n-----END CERTIFICATE-----",
+          "zone_uuid": "my-zoneid",
+          "key": "-----BEGIN RSA PRIVATE KEY-----\nMIIEowIBAAKCAQEAj5yQ3hBsekZsmftzRyCEbmYsO90HUNYtiaaV0DkmRqqPeD8s\nuN/Hp9XLRcyQRKgZ2h+Y1nIz15n1h1ykzEqAGcIWnNvIz1tDapf6ALAbXGKPPV9/\noqzt49nZq+5IX67yQZg4f3Pj5KSJhC3ckkA2f1cCavhVI9r4BTbMFJe6cIxju+sT\nv5YXEpK66WI+ze5mOKI7eenHczSeQW/GzkqZkDl1r/tspbOyl1mtMQVBaQOP1QSx\ntQT5xq+036RrLgnYtEqKoHI4pO26S5SOk5t4gd3ssKhlqUH2zRTNMkXVH/57dwAc\noGFBEgYLy570ya41nVuHlAywF/09SpHKKuDjcQIDAQABAoIBACd4RGiD4wyIJnj7\nnudBjKQ6+JVLXiNdeg6G9k3QJzDs15mY41W8S0dZfxCj9FKqUNCeNodZw93RtqWJ\nVNHA+AwcR9K8pSg4UQMO2esue5acj/myMYYoOQmSajzStJl3n6VfjMeatlu0zQbD\nBAg+FbxR0ZxMvDmqiNgGA3j1aoxb3+dLVyIPQAdDx24yEMrWqV7HzYzMNepCl0pe\nQnnxt7l6UBNaKVRrzfP+ObwiB+dUXuwjuNd6Bfpbye3gav5/tuKQ/ReSCAHmD2MQ\nOYsq+36It3XyDNohMuL/RZvYVYX8RUbV6wzPUPiy5Fx+U9Jr6uAeNnx5+Lo9/dQg\nd1difwECgYEAxpGjzg5AgNiPvaskO2L52Q2BO73bf7Z0CSh30FWKeEA/juBl45TF\nVwlPjPRpkpaC2ZgGtDphFcft6VNce7ncGt2DbIM2xqKo9nyEF+XLpe1bRhvr/RTU\nGjmUmXqw70vhCx+nUi9s2qE2AEO9slVnGRvS+xxeG7cZWWpfpBSA6TkCgYEAuSXM\nROB8nSBudMXPgmj5J0VgnEsueebQl6Rm7IUVnDxVaNy949IJq1HU8hjaKV+o7iwg\nbYszMPdIz+bePKxAiiEG6MevFhTxdbyJUfY7hHH/scy2dMzaYC71Ism/D875EI9b\nQ/MqquOYxVQbeHO2hVa1iaTCHoX5qb5zXUq1Y/kCgYBKNGTdfQ/31nYo8ArTMpKh\n3V0dIT8kw98rCPd1YHIlrATUdOE+ofr5Ip6a0z+cqyhs/lYLBgH/7L3owuE9z2AE\nniEd7Q8MPf8cVb3bXGG1OTUxxv9yjVUSE9CHZoU2d8m6qXKS0OxB65rNkIMUYLvt\ncytt8dTtUIhllM32+D6QaQKBgGX63dKqW7koXe7P7gaEz4fD/PzZpFXcvtRn55Er\nlMWjrd++hpFv5YeJ4WMgMTpMyH23rHzqCV5VNrPdFFgTANGUc3vQUS42hvE00eZl\nXE8Ng6tpeK5JD5efBcMNoMGSXTmz3K9Gxx+tkT5Pn3nvMn+rTP7t00aAwQ2wK1cd\niV/xAoGBAKS+EkMZjqWXXFrxyNPJNOzdYg3QqaHodMxycBn2aU7t+rt/OQGSMIkI\ny01Kwzko07xuYCkhsmfUweKs1kykM103nTBsX9zyLH5nu/BbjoHPZNSUKH1MqXlp\nfkaCk5H3D6a1FwibPF60VJIluf1sgEEl/fhTeylXsQbYFtSoqybU\n-----END RSA PRIVATE KEY-----",
+          "url": "https://my-ias.auth.com"
+        },
+        "syslog_drain_url": null,
+        "volume_mounts": []
+      }
+    ]
+}
