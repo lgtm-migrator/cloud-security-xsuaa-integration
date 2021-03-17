@@ -1,6 +1,6 @@
 # Description
 This sample is a Java back-end consumer application running on the Cloud Foundry that consumes by [Service Manager](https://help.sap.com/viewer/09cc82baadc542a688176dce601398de/Cloud/en-US/3a27b85a47fc4dff99184dd5bf181e14.html) exposed reusable service via mTLS. For all incoming requests it checks whether the user is authorized using the 
-[`IasTokenAuthenticator`](https://github.com/SAP/cloud-security-xsuaa-integration/blob/x509-app2service/java-security/src/main/java/com/sap/cloud/security/servlet/IasTokenAuthenticator.java) which is defined in the [Java Security](https://github.com/SAP/cloud-security-xsuaa-integration/tree/x509-app2service/java-security) library. Then request is forwarded to provider-service via mTLS.
+[`IasTokenAuthenticator`](https://github.com/SAP/cloud-security-xsuaa-integration/blob/x509-app2service/java-security/src/main/java/com/sap/cloud/security/servlet/IasTokenAuthenticator.java) which is defined in the [Java Security](https://github.com/SAP/cloud-security-xsuaa-integration/tree/x509-app2service/java-security) library. Then request is forwarded to [provider-service](../provider-x509) via mTLS.
 
 # Deployment on Cloud Foundry
 To deploy the application, the following steps are required:
@@ -11,7 +11,7 @@ To deploy the application, the following steps are required:
 - Bind provider-service-x509-instance and consumer-ias to the application
 - Access the application
 
-Previously provider application should be set up as per the [read me](../provider-x509/README.md).
+Previously provider application should be set up as per the [README.md](../provider-x509/README.md).
 
 ## Compile the Java application
 Run maven to package the application
