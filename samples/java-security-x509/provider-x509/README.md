@@ -1,6 +1,6 @@
 # Description
 This sample is a Java back-end application running on the Cloud Foundry as a (reuse) service provider. For all incoming requests it checks whether the user is authenticated using the 
-[`IasTokenAuthenticator`](https://github.com/SAP/cloud-security-xsuaa-integration/blob/x509-app2service/java-security/src/main/java/com/sap/cloud/security/servlet/IasTokenAuthenticator.java) which is defined in the [java security](https://github.com/SAP/cloud-security-xsuaa-integration/tree/x509-app2service/java-security) library and it validates X509 certificate from the incoming request.
+[`IasTokenAuthenticator`](https://github.com/SAP/cloud-security-xsuaa-integration/blob/x509-app2service/java-security/src/main/java/com/sap/cloud/security/servlet/IasTokenAuthenticator.java) which is defined in the [java security](/java-security) library and it validates X509 certificate from the incoming request.
 
 # Deployment on Cloud Foundry
 To deploy the application, the following steps are required:
