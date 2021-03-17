@@ -1,16 +1,16 @@
 # Description
-This sample is a Java back-end application running on the Cloud Foundry as a service provider. For all incoming requests it checks whether the user is authorized using the 
-[`IasTokenAuthenticator`](https://github.com/SAP/cloud-security-xsuaa-integration/blob/x509-app2service/java-security/src/main/java/com/sap/cloud/security/servlet/IasTokenAuthenticator.java) which is defined in the [Java Security](https://github.com/SAP/cloud-security-xsuaa-integration/tree/x509-app2service/java-security) library and it validates X509 certificate from the incoming request.
+This sample is a Java back-end application running on the Cloud Foundry as a (reuse) service provider. For all incoming requests it checks whether the user is authenticated using the 
+[`IasTokenAuthenticator`](https://github.com/SAP/cloud-security-xsuaa-integration/blob/x509-app2service/java-security/src/main/java/com/sap/cloud/security/servlet/IasTokenAuthenticator.java) which is defined in the [java security](https://github.com/SAP/cloud-security-xsuaa-integration/tree/x509-app2service/java-security) library and it validates X509 certificate from the incoming request.
 
 # Deployment on Cloud Foundry
 To deploy the application, the following steps are required:
 - Compile the Java application
 - Configure the manifest
 - Deploy the application    
-- Create an IAS service broker instance
-- Bind service broker to application using X509
+- Create an IAS service instance
+- Bind service instance to application using X509
 - Access the application
-- Expose application as reusable service in Service manager
+- Expose application as reusable service in Service Manager
 
 ## Compile the Java application
 Run maven to package the application
@@ -28,7 +28,7 @@ Deploy the application using cf push. It will expect 1 GB of free memory quota.
 cf push --vars-file ../vars.yml
 ```
 
-## Create the IAS service broker instance
+## Create the IAS service instance
 Use the IAS service broker capability by providing service catalog in configuration and create a new service instance.
 ```shell script
 cf create-service identity application service-provider-broker -c '{
@@ -50,7 +50,7 @@ cf create-service identity application service-provider-broker -c '{
 }'
 ```
 
-## Bind the IAS service broker instance with provider application using X509
+## Bind the IAS service instance with provider application using X509
 ```shell script
 cf bind-service provider-service-x509 service-provider-broker -c '{"credential-type": "X509_GENERATED"}'
 ```
