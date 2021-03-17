@@ -82,7 +82,7 @@ You ('<your email>') can access provider service with x509.
 ```
 - If you call the same endpoint without `Authorization` header you should get a `401`.
 
-# Expose your application as a reusable service in Service manager
+# Expose your application as a reusable service in Service Manager
 - Get the CLI tool `smctl`, if you don't have it from 
 [SMCTL GitHub](https://wiki.wdf.sap.corp/wiki/display/PFS/How+to+register+a+subaccount-scoped+service+broker)
 ## Login to smctl 
@@ -105,7 +105,7 @@ You should be able to see your service in the service catalog. Now you can creat
 cf create-service provider-service-x509 reuse-plan provider-service-x509-instance
 ```
 
-More information about registering service in Service manager can be found [here](https://wiki.wdf.sap.corp/wiki/display/PFS/How+to+register+a+subaccount-scoped+service+broker)
+More information about registering service in Service Manager can be found [here](https://wiki.wdf.sap.corp/wiki/display/PFS/How+to+register+a+subaccount-scoped+service+broker)
 
 Proceed with consumer application setup by following steps in the [consumer-x509 readme](../consumer-x509/README.md)
 
