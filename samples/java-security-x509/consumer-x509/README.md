@@ -60,8 +60,7 @@ curl -X POST \
 curl -X GET https://consumer-x509-((ID)).((LANDSCAPE_APPS_DOMAIN))/hello-x509 -H 'Authorization: Bearer <<your id_token>>'
 ```
 
-If `provider-service-x509` could be accessed by consumer application `consumer-x509` you should see something like this:
-:smile:
+If `consumer-x509` application was able to access `provider-service-x509`, you should see something like this: :smile:
 
 ## Clean-Up
 Finally delete your application and your service instances using the following commands:
