@@ -12,6 +12,4 @@ applications:
   path: target/java-security-x509-provider.war
   buildpacks:
     - java_buildpack
-  service:
-    - service-provider-broker
 ...

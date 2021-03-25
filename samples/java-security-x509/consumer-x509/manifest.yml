@@ -12,6 +12,5 @@ applications:
   buildpacks:
     - java_buildpack
   services:
-    - consumer-ias
     - provider-service-x509-instance
 ...

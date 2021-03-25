@@ -4,8 +4,8 @@ This sample is a Java back-end consumer application running on the Cloud Foundry
 
 # Deployment on Cloud Foundry
 To deploy the application, the following steps are required:
-- Compile the Java application
 - Create an IAS service instance
+- Compile the Java application
 - Configure the manifest
 - Deploy the application    
 - Bind provider-service-x509-instance and consumer-ias to the application
@@ -13,16 +13,17 @@ To deploy the application, the following steps are required:
 
 Previously provider application should be set up as per the [README.md](../provider-x509/README.md).
 
-## Compile the Java application
-Run maven to package the application
-```shell
-mvn clean package
-```
-
 ## Create the IAS service instance
 Create an IAS service instance defining `consumed-services` configuration with exposed service `provider-service-x509` from service catalog.
 ```shell
 cf create-service identity application consumer-ias -c '{"consumed-services": [{"service-instance-name": "provider-service-x509"}],"xsuaa-cross-consumption": true,"display-name" : "consumer-ias","multi-tenant":true}'
+```
+> :exclamation: Make sure to have the [provider-x509](../provider-x509/README.md) implemented prior consuming service of it!
+
+## Compile the Java application
+Run maven to package the application
+```shell
+mvn clean package
 ```
 
 ## Configure the manifest
@@ -36,14 +37,11 @@ cf push --vars-file ../vars.yml
 ```
 
 ## Bind consumer-x509 application
-- Bind application with `consumer-ias` instance
+- Bind application with `consumer-ias` instance with X509 generated credential type
 ```shell script
 cf bind-service consumer-x509 consumer-ias -c '{"credential-type": "X509_GENERATED"}'
 ```
-- Bind the exposed reusable service with the application to get the service URL in system environment variable `VCAP_SERVICES`
-```shell script
-cf bind-service consumer-x509 provider-service-x509-instance
-```
+
 ## Access the application using IAS token
 - Access credentials configuration(i.e. `clientid`, `clientsecret`, `certificate`, `key`) from system environment variable `VCAP_SERVICES.identity.credentials`. You can get them using `cf env consumer-x509`. 
 - Get an access token via `curl`. Make sure you replace the placeholders `clientid`, `clientsecret` and `url` (without `https://` !!!) 

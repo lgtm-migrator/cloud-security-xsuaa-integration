@@ -71,6 +71,7 @@ curl -X POST \
 ```
 - Copy the `id_token` into your clipboard.
 - Get X509 certificate and key from system environment variable `VCAP_SERVICES.identity.credentials` and store them in separate files with `*.pem` extension
+> :exclamation: In case you experience invalid PEM file errors, `\\n` characters might have to be replaced by newlines `\n` to have the PEM in the correct format. You can use: `awk '{gsub(/\\n/,"\n")}1' <file>.pem`
 - Access the app via `curl`. Don't forget to fill the placeholders.
 ```shell script
 curl --cert cert.pem --key key.pem -X POST https://provider-service-x509-<<ID>>.cert.<<LANDSCAPE_APPS_DOMAIN>>/hello-x509 -H 'Authorization: Bearer <<your id_token>>'
