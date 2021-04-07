@@ -35,8 +35,8 @@ public class XsuaaIntegrationTest {
 			.setKeys("/publicKey.txt", "/privateKey.txt");
 
 	@Test
-	public void xsuaaTokenValidationSucceeds_withXsuaaCombiningValidator() throws IOException {
-		OAuth2ServiceConfigurationBuilder configuration = rule.getConfigurationBuilderFromFile(
+	public void xsuaaTokenValidationSucceeds_withXsuaaCombiningValidator() {
+		OAuth2ServiceConfigurationBuilder configuration = rule.getOAuth2ServiceConfigurationBuilderFromFile(
 				"/xsuaa/vcap_services-single.json");
 		Token token = rule.getJwtGeneratorFromFile("/xsuaa/token.json").createToken();
 
@@ -46,8 +46,19 @@ public class XsuaaIntegrationTest {
 	}
 
 	@Test
-	public void xsaTokenValidationSucceeds_withXsuaaCombiningValidator() throws IOException {
-		OAuth2ServiceConfiguration configuration = rule.getConfigurationBuilderFromFile(
+	public void xsuaaTokenValidationFails_withTokenFromOtherSubaccount() {
+		OAuth2ServiceConfigurationBuilder configuration = rule.getOAuth2ServiceConfigurationBuilderFromFile(
+				"/xsuaa/vcap_services-multi.json");
+		Token token = rule.getJwtGeneratorFromFile("/xsuaa/token-foreignSubaccount.json").createToken();
+
+		CombiningValidator<Token> tokenValidator = JwtValidatorBuilder.getInstance(configuration.build()).build();
+		ValidationResult result = tokenValidator.validate(token);
+		assertThat(result.getErrorDescription()).isEqualTo("Jwt token with audience [mdmbp-broker-ms-provider-integration!b12186.MDM.BPRel, mdmbp-broker-ms-provider-integration!b12186.callback, mdmbp-broker-ms-provider-integration!b12186.MDM.BPBlocked, mdmbp-broker-ms-provider-integration!b12186.MDM.BP, mdmbp-broker-ms-provider-integration!b12186.MDM.BPKM, uaa, mdmbp-broker-ms-provider-integration!b12186, mdmbp-broker-ms-provider-integration!b12186.MDM.Service, sb-bpservices-mdbpintgrtestconsumer11!b18441|mdmbp-broker-ms-provider-integration!b12186, mdmbp-broker-ms-provider-integration!b12186.MDM.BPDeleted, mdmbp-broker-ms-provider-integration!b12186.MDM.Config] is not issued for these clientIds: [sb-mdmbp-broker-production!b9541, mdmbp-broker-production!b9541].");
+	}
+
+	@Test
+	public void xsaTokenValidationSucceeds_withXsuaaCombiningValidator() {
+		OAuth2ServiceConfiguration configuration = rule.getOAuth2ServiceConfigurationBuilderFromFile(
 				"/xsa-simple/vcap_services-single.json")
 				.runInLegacyMode(true)
 				.build();
@@ -61,8 +72,8 @@ public class XsuaaIntegrationTest {
 	}
 
 	@Test
-	public void xsuaaTokenValidationFails_withIasCombiningValidator() throws IOException {
-		OAuth2ServiceConfiguration configuration = rule.getConfigurationBuilderFromFile(
+	public void xsuaaTokenValidationFails_withIasCombiningValidator() {
+		OAuth2ServiceConfiguration configuration = rule.getOAuth2ServiceConfigurationBuilderFromFile(
 				"/ias-simple/vcap_services-single.json")
 				.withUrl("https://myauth.com")
 				.build();

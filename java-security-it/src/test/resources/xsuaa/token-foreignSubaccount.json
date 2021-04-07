@@ -1,0 +1,70 @@
+{
+  "header": {
+    "alg": "RS256",
+    "jku": "http://auth.com/token_keys",
+    "kid": "key-id-0"
+  },
+  "payload": {
+    "jti": "41ad59ffd5a744e1a198e98e6e75f370",
+    "ext_attr": {
+      "enhancer": "XSUAA",
+      "subaccountid": "6568edcd-f577-4174-ac0d-12c888aa8509",
+      "zdn": "mdbpintgrtestconsumer11",
+      "serviceinstanceid": "fd9822b4-b0c1-42c2-b9a2-21365246f772"
+    },
+    "sub": "sb-bpservices-mdbpintgrtestconsumer11!b18441|mdmbp-broker-ms-provider-integration!b12186",
+    "scope": [
+      "mdmbp-broker-ms-provider-integration!b12186.MDOAPIMaintain",
+      "mdmbp-broker-ms-provider-integration!b12186.MDM.BP.Rep",
+      "mdmbp-broker-ms-provider-integration!b12186.callback.write",
+      "mdmbp-broker-ms-provider-integration!b12186.MDM.BP.DRM",
+      "mdmbp-broker-ms-provider-integration!b12186.MDM.BPKM.Rep",
+      "mdmbp-broker-ms-provider-integration!b12186.MDM.Config.Write",
+      "mdmbp-broker-ms-provider-integration!b12186.MDM.BPDeleted.Read",
+      "mdmbp-broker-ms-provider-integration!b12186.MDM.BPKM.Read",
+      "mdmbp-broker-ms-provider-integration!b12186.MDOAPIDisplay",
+      "mdmbp-broker-ms-provider-integration!b12186.MDOScopeMaintain",
+      "mdmbp-broker-ms-provider-integration!b12186.MDOCopyModel",
+      "mdmbp-broker-ms-provider-integration!b12186.MDM.BPRel.Write",
+      "mdmbp-broker-ms-provider-integration!b12186.MDOEntityMaintain",
+      "mdmbp-broker-ms-provider-integration!b12186.MDM.BP.Write",
+      "mdmbp-broker-ms-provider-integration!b12186.MDM.BPBlocked.Read",
+      "mdmbp-broker-ms-provider-integration!b12186.MDOScopeDisplay",
+      "mdmbp-broker-ms-provider-integration!b12186.MDOModelMaintain",
+      "mdmbp-broker-ms-provider-integration!b12186.MDOObjectTypeOwnerDisplay",
+      "mdmbp-broker-ms-provider-integration!b12186.MDM.BP.Block",
+      "mdmbp-broker-ms-provider-integration!b12186.MDOEntityDisplay",
+      "mdmbp-broker-ms-provider-integration!b12186.MDM.BPRel.Rep",
+      "uaa.resource",
+      "mdmbp-broker-ms-provider-integration!b12186.MDM.Config.Read",
+      "mdmbp-broker-ms-provider-integration!b12186.MDM.Service.Read",
+      "mdmbp-broker-ms-provider-integration!b12186.MDM.BP.Read",
+      "mdmbp-broker-ms-provider-integration!b12186.MDM.BPRel.Read",
+      "mdmbp-broker-ms-provider-integration!b12186.MDOModelDisplay",
+      "mdmbp-broker-ms-provider-integration!b12186.MDOTriggerReplication",
+      "mdmbp-broker-ms-provider-integration!b12186.MDOObjectTypeOwnerMaintain"
+    ],
+    "client_id": "sb-bpservices-mdbpintgrtestconsumer11!b18441|mdmbp-broker-ms-provider-integration!b12186",
+    "cid": "sb-bpservices-mdbpintgrtestconsumer11!b18441|mdmbp-broker-ms-provider-integration!b12186",
+    "azp": "sb-bpservices-mdbpintgrtestconsumer11!b18441|mdmbp-broker-ms-provider-integration!b12186",
+    "grant_type": "client_credentials",
+    "rev_sig": "d94c879d",
+    "iat": 1617187229,
+    "exp": 1617230429,
+    "iss": "https://mdbpintgrtestconsumer11.authentication.eu10.hana.ondemand.com/oauth/token",
+    "zid": "6568edcd-f577-4174-ac0d-12c888aa8509",
+    "aud": [
+      "mdmbp-broker-ms-provider-integration!b12186.MDM.BPRel",
+      "mdmbp-broker-ms-provider-integration!b12186.callback",
+      "mdmbp-broker-ms-provider-integration!b12186.MDM.BPBlocked",
+      "mdmbp-broker-ms-provider-integration!b12186.MDM.BP",
+      "mdmbp-broker-ms-provider-integration!b12186.MDM.BPKM",
+      "uaa",
+      "mdmbp-broker-ms-provider-integration!b12186",
+      "mdmbp-broker-ms-provider-integration!b12186.MDM.Service",
+      "sb-bpservices-mdbpintgrtestconsumer11!b18441|mdmbp-broker-ms-provider-integration!b12186",
+      "mdmbp-broker-ms-provider-integration!b12186.MDM.BPDeleted",
+      "mdmbp-broker-ms-provider-integration!b12186.MDM.Config"
+    ]
+  }
+}
