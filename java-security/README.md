@@ -30,7 +30,7 @@ In case of XSUAA does the JWT provide a valid `jku` token header parameter that 
 
 ## Supported Identity Services
 - XSUAA
-- as of version `2.8.0` IAS
+- as of version `2.8.0` IAS (:bulb: no multi-tenancy support yet)
 
 ## Supported Algorithms
 
@@ -46,7 +46,7 @@ In case of XSUAA does the JWT provide a valid `jku` token header parameter that 
 <dependency>
     <groupId>com.sap.cloud.security</groupId>
     <artifactId>java-security</artifactId>
-    <version>2.8.7</version>
+    <version>2.8.12</version>
 </dependency>
 <dependency>
     <groupId>org.apache.httpcomponents</groupId>
@@ -114,7 +114,7 @@ This decodes an encoded JSON Web Token (JWT) and parses its json header and payl
 
 ```java
 String authorizationHeader = "Bearer eyJhbGciOiJGUzI1NiJ2.eyJhh...";
-Token token = new XsuaaToken(authorizationHeader);
+Token token = Token.create(authorizationHeader); // supports tokens issued by xsuaa and ias
 ```
 
 ### Validate Token to check Authentication

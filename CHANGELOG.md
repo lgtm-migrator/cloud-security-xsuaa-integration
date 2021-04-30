@@ -1,6 +1,41 @@
-# Change Log 
-
+# Change Log
 All notable changes to this project will be documented in this file.
+## 2.8.12 and 0.1.5 [BETA]
+- The following dependencies were updated:
+    - spring.security.version 5.4.5 --> 5.4.6
+    - spring.core.version 5.3.5 --> 5.3.6
+    - spring.boot.version 2.4.4 --> 2.4.5
+    - org.json.version 20201115 --> 20210307
+    - junit.version 4.13.1 --> 4.13.2
+    - junit-jupiter.version 5.7.0 --> 5.7.1
+    - reactor.version 3.4.2 --> 3.4.5
+    - reactor.test.version 3.4.2 --> 3.4.5
+- [token-client] ```OAuth2ServiceException``` provides ```getHttpStatusCode()```. This allows applications to retry e.g. in case of ```429``` - when the request was rate limited.
+    
+## 2.8.10 and 0.1.4 [BETA]
+- [spring-xsuaa] introduced spring properties for IAS -> Xsuaa token exchange activation, as described [here](/spring-xsuaa/README.md#ias-to-xsuaa-token-exchange)
+- [java-security-test] uses jetty BoM to fix CVE-2021-28164 and CVE-2021-28165.
+  - jetty 9.4.38.v20210224 --> 9.4.39.v20210325
+
+## 2.8.9 and 0.1.3 [BETA]
+- [java-security-test] and java samples to fix CVE-2021-28164 and CVE-2021-28165.
+  - jetty 9.4.38.v20210224 --> 9.4.39.v20210325
+- [spring-xsuaa]
+  - exclude transient dependency to net.minidev:json-smart to resolve CVE-2021-27568
+- [xsuaa-spring-boot-starter] [resourceserver-security-spring-boot-starter]
+  - spring-boot-starter 2.4.3 --> 2.4.4
+  - spring-boot-starter-security 2.4.3 --> 2.4.4
+  - net.minidev:json-smart 2.3 --> 2.4.2 to resolve CVE-2021-27568
+  
+## 2.8.8 and 0.1.2 [BETA]
+- [java-security-test] and java samples
+  - jetty 9.4.36.v20210114 --> 9.4.38.v20210224 (seems to be incompatible with javax.servlet-api 3.1.0)
+  - javax.servlet:javax.servlet-api 3.1.0 --> 4.0.1 (recommended version)
+- [java-security] supports with ``SpringSecurityContext`` a way to read tokens from Spring's `SecurityContextHolder`, in case a token was set by the application using one of these client-libraries:
+  -  `org.springframework.security.oauth:spring-security-oauth2`
+  -  `com.sap.cloud.security.xsuaa:spring-xsuaa`
+  -  `com.sap.cloud.security:spring-security`
+
 
 ## 2.8.7 and 0.1.1 [BETA]
 - [xsuaa-spring-boot-starter] and [resourceserver-security-spring-boot-starter (BETA)]
