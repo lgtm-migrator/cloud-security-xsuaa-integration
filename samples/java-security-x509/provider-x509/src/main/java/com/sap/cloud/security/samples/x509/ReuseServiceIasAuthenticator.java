@@ -3,6 +3,9 @@ package com.sap.cloud.security.samples.x509;
 import com.sap.cloud.security.config.Environments;
 import com.sap.cloud.security.config.OAuth2ServiceConfiguration;
 import com.sap.cloud.security.servlet.IasTokenAuthenticator;
+import com.sap.cloud.security.servlet.TokenAuthenticationResult;
+import com.sap.cloud.security.servlet.TokenAuthenticatorResult;
+import com.sap.cloud.security.token.SecurityContext;
 import com.sap.cloud.security.xsuaa.mtls.SSLContextFactory;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -15,6 +18,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nullable;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -22,11 +27,10 @@ import java.security.GeneralSecurityException;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
-import java.util.Collections;
 
-public class X509Authenticator extends IasTokenAuthenticator {
+public class ReuseServiceIasAuthenticator extends IasTokenAuthenticator {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(X509Authenticator.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReuseServiceIasAuthenticator.class);
     private HttpsClient httpsClient;
 
     @Override
@@ -39,28 +43,47 @@ public class X509Authenticator extends IasTokenAuthenticator {
         return config;
     }
 
+    @Override
+    public TokenAuthenticationResult validateRequest(ServletRequest request, ServletResponse response) {
+        TokenAuthenticationResult result = super.validateRequest(request, response);
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        if (validateX509(httpRequest)) {
+            return result;
+        } else {
+            return TokenAuthenticatorResult.createUnauthenticated("Invalid X509 certificate");
+        }
+    }
+
     boolean validateX509(HttpServletRequest httpRequest) {
-        Collections.list(httpRequest.getHeaderNames()).forEach(h -> LOGGER.debug("Headers: {}", h));
-        JSONObject proofToken = getProofToken();
+        //TODO introduce cache as described here: https://github.wdf.sap.corp/CPSecurity/Knowledge-Base/blob/master/03_ApplicationSecurity/ProofOfPossession.md#cache
+        JSONArray proofTokens = getProofToken();
+        if (proofTokens == null) {
+            return false;
+        }
         X509Certificate x509Cert;
         try {
             x509Cert = decodeX509(httpRequest.getHeader("x-forwarded-client-cert"));
             LOGGER.debug("Incoming request x509 issuer DN: {}, issuer: {}", x509Cert.getIssuerDN().getName(), x509Cert.getSubjectDN().getName());
 
-            if (proofToken != null) {
-                JSONArray trustedX509List = proofToken.getJSONArray("x509");
-                for (Object obj : trustedX509List) {
-                    JSONObject trustedX509 = (JSONObject) obj;
-                    String trustedDn = trustedX509.getString("dn");
-                    String trustedIssuer = trustedX509.getString("issuer");
-                    if (trustedIssuer.equals(x509Cert.getIssuerDN().getName().replaceAll(" *, *", ",")) &&
-                            trustedDn.equals(x509Cert.getSubjectDN().getName().replaceAll(" *, *", ","))) {
-                        LOGGER.info("x509 validation successful");
-                        return true;
+            for (Object proofToken : proofTokens) {
+                JSONObject proofTokenObject = (JSONObject) proofToken;
+                if (proofTokenObject.getString("providerClientId").equals(getServiceConfiguration().getClientId())) {
+                    JSONArray x509List = proofTokenObject.getJSONArray("x509");
+                    for (Object x509 : x509List) {
+                        JSONObject x509Object = (JSONObject) x509;
+                        String trustedDn = x509Object.getString("dn");
+                        String trustedIssuer = x509Object.getString("issuer");
+                        if (trustedIssuer.equals(x509Cert.getIssuerDN().getName().replaceAll(" *, *", ",")) &&
+                                trustedDn.equals(x509Cert.getSubjectDN().getName().replaceAll(" *, *", ","))) {
+                            LOGGER.info("x509 validation successful");
+                            SecurityContext.setConsumedServiceId(proofTokenObject.getJSONArray("consumedServiceInstanceIds"));
+                            return true;
 
+                        }
                     }
                 }
             }
+
         } catch (CertificateException e) {
             LOGGER.error("X509 client certificate creation failed");
         }
@@ -91,7 +114,7 @@ public class X509Authenticator extends IasTokenAuthenticator {
     }
 
     @Nullable
-    protected JSONObject getProofToken() {
+    protected JSONArray getProofToken() {
         try {
             this.httpsClient = new HttpsClient(SSLContextFactory.getInstance()
                     .create(getServiceConfiguration().getProperty("cert"), getServiceConfiguration().getProperty("key")));
@@ -115,10 +138,9 @@ public class X509Authenticator extends IasTokenAuthenticator {
         }
     }
 
-    JSONObject decodeProofToken(String proofToken) {
-        String trimmed = proofToken.substring(1, proofToken.length() - 1);
-        LOGGER.info("Proof token value: {}", trimmed);
-        return new JSONObject(trimmed);
+    JSONArray decodeProofToken(String proofToken) {
+        LOGGER.debug("Proof token value: {}", proofToken);
+        return new JSONArray(proofToken);
     }
 
 }

@@ -1,6 +1,8 @@
 package com.sap.cloud.security.samples.x509;
 
+import com.sap.cloud.security.token.SecurityContext;
 import org.apache.commons.io.IOUtils;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -21,12 +23,12 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SystemStubsExtension.class)
-class X509AuthenticatorTest {
+class ReuseServiceIasAuthenticatorTest {
 
     @SystemStub
     private static EnvironmentVariables environmentVariables;
 
-    private static final X509Authenticator X509_AUTHENTICATOR = mock(X509Authenticator.class);
+    private static final ReuseServiceIasAuthenticator REUSE_SERVICE_AUTHENTICATOR = mock(ReuseServiceIasAuthenticator.class);
     private static final String ISSUER = "CN=SAP Cloud Platform Client CA, OU=SAP Cloud Platform Clients, O=SAP SE, L=EU10-Canary, C=DE";
     private static final String DN = "CN=bdcd300c-b202-4a7a-bb95-2a7e6d15fe47/5ae493c5-e0ed-4d34-a1c6-97a7c715dc54, L=aoxk2addh.accounts400.ondemand.com, OU=8e1affb2-62a1-43cc-a687-2ba75e4b3d84, OU=Canary, OU=SAP Cloud Platform Clients, O=SAP SE, C=DE";
 
@@ -45,45 +47,48 @@ class X509AuthenticatorTest {
         servletRequestMock = mock(HttpServletRequest.class);
         when(servletRequestMock.getHeader("x-forwarded-client-cert")).thenReturn(encodedSapX509);
         when(servletRequestMock.getHeaderNames()).thenReturn(Collections.emptyEnumeration());
+        when(REUSE_SERVICE_AUTHENTICATOR.getServiceConfiguration()).thenCallRealMethod();
     }
 
     @Test
-    public void decodeX509WithLabel() throws CertificateException {
-        when(X509_AUTHENTICATOR.decodeX509(encodedSapX509)).thenCallRealMethod();
-        X509Certificate cert = X509_AUTHENTICATOR.decodeX509(encodedSapX509);
+    void decodeX509WithLabel() throws CertificateException {
+        when(REUSE_SERVICE_AUTHENTICATOR.decodeX509(encodedSapX509)).thenCallRealMethod();
+        X509Certificate cert = REUSE_SERVICE_AUTHENTICATOR.decodeX509(encodedSapX509);
         assertEquals(ISSUER, cert.getIssuerDN().toString());
         assertEquals(DN, cert.getSubjectDN().getName());
     }
 
     @Test
-    public void decodeX509WithoutLabel() throws CertificateException {
-        when(X509_AUTHENTICATOR.decodeX509(encodedSapX509)).thenCallRealMethod();
-        X509Certificate cert = X509_AUTHENTICATOR.decodeX509(encodedSapX509);
+    void decodeX509WithoutLabel() throws CertificateException {
+        when(REUSE_SERVICE_AUTHENTICATOR.decodeX509(encodedSapX509)).thenCallRealMethod();
+        X509Certificate cert = REUSE_SERVICE_AUTHENTICATOR.decodeX509(encodedSapX509);
         assertEquals(ISSUER, cert.getIssuerDN().toString());
         assertEquals(DN, cert.getSubjectDN().getName());
     }
 
     @Test
-    public void decodeProofToken() {
-        when(X509_AUTHENTICATOR.decodeProofToken(proofToken)).thenCallRealMethod();
-        JSONObject x509 = (JSONObject) X509_AUTHENTICATOR.decodeProofToken(proofToken).getJSONArray("x509").get(0);
+    void decodeProofToken() {
+        when(REUSE_SERVICE_AUTHENTICATOR.decodeProofToken(proofToken)).thenCallRealMethod();
+        JSONObject proofTokenObj = (JSONObject) REUSE_SERVICE_AUTHENTICATOR.decodeProofToken(proofToken).get(0);
+        JSONObject x509 = (JSONObject)  proofTokenObj.getJSONArray("x509").get(1);
         assertEquals(ISSUER.replaceAll(" *, *", ","), x509.getString("issuer"));
         assertEquals(DN.replaceAll(" *, *", ","), x509.getString("dn"));
     }
 
     @Test
-    public void validateX509() throws CertificateException {
-        when(X509_AUTHENTICATOR.decodeProofToken(proofToken)).thenCallRealMethod();
-        JSONObject x509 = X509_AUTHENTICATOR.decodeProofToken(proofToken);
-        when(X509_AUTHENTICATOR.getProofToken()).thenReturn(x509);
-        when(X509_AUTHENTICATOR.decodeX509(encodedSapX509)).thenCallRealMethod();
-        when(X509_AUTHENTICATOR.validateX509(servletRequestMock)).thenCallRealMethod();
+    void validateX509() throws CertificateException {
+        when(REUSE_SERVICE_AUTHENTICATOR.decodeProofToken(proofToken)).thenCallRealMethod();
+        JSONArray proofTokenList = REUSE_SERVICE_AUTHENTICATOR.decodeProofToken(proofToken);
+        when(REUSE_SERVICE_AUTHENTICATOR.getProofToken()).thenReturn(proofTokenList);
+        when(REUSE_SERVICE_AUTHENTICATOR.decodeX509(encodedSapX509)).thenCallRealMethod();
+        when(REUSE_SERVICE_AUTHENTICATOR.validateX509(servletRequestMock)).thenCallRealMethod();
 
-        assertTrue(X509_AUTHENTICATOR.validateX509(servletRequestMock));
+        assertTrue(REUSE_SERVICE_AUTHENTICATOR.validateX509(servletRequestMock));
+        assertNotNull(SecurityContext.getConsumedServiceIds());
 
         when(servletRequestMock.getHeader("x-forwarded-client-cert")).thenReturn(encodedRandomX509);
-        when(X509_AUTHENTICATOR.decodeX509(encodedRandomX509)).thenCallRealMethod();
-        assertFalse(X509_AUTHENTICATOR.validateX509(servletRequestMock));
+        when(REUSE_SERVICE_AUTHENTICATOR.decodeX509(encodedRandomX509)).thenCallRealMethod();
+        assertFalse(REUSE_SERVICE_AUTHENTICATOR.validateX509(servletRequestMock));
     }
 
 }

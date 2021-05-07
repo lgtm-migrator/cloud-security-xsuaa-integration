@@ -11,7 +11,7 @@ import java.util.Collections;
  * Class to collect the result of the authentication performed by a
  * {@link TokenAuthenticator}.
  */
-class TokenAuthenticatorResult implements TokenAuthenticationResult {
+public class TokenAuthenticatorResult implements TokenAuthenticationResult {
 
 	private Collection<String> scopes = Collections.emptyList();
 	private Token token = null;
