@@ -23,6 +23,11 @@
             <artifactId>java-api</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs-annotations</artifactId>
+            <optional>true</optional>
+        </dependency>
         <!-- Required only in case of multiple xsuaa bindings -->
         <dependency>
             <groupId>com.sap.cloud.security.xsuaa</groupId>
